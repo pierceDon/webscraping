@@ -30,6 +30,7 @@ soup = BeautifulSoup(webpage, 'html.parser')
 
 
 
+
 #SOME USEFUL FUNCTIONS IN BEAUTIFULSOUP
 #-----------------------------------------------#
 # find(tag, attributes, recursive, text, keywords)
@@ -41,4 +42,31 @@ soup = BeautifulSoup(webpage, 'html.parser')
 #Limit = find with limit of 1
 #keyword: allText = Obj.find(id="title",class="text")
 
-print(soup.title)
+#print(soup.title.text)
+
+table_rows = soup.findAll("tr")
+
+print(table_rows[2].text)
+
+state_death_ratio = ""
+state_best_testing = ""
+state_worst_testing = ""
+highest_death_ratio = 0.0
+best_test_ratio = 0.0
+worst_test_ratio = 1000.0
+
+for row in table_rows[2:53]:
+    td = row.findAll("td")
+    state = td[1].text.strip('\n')
+    total_cases = int(td[2].text.replace(",",""))
+    total_deaths = int(td[4].text.replace(",",""))
+    total_tested = int(td[10].text.replace(",",""))
+    population = int(td[12].text.replace(",",""))
+    
+    death_ratio = total_deaths/total_cases
+    test_ratio = total_tested/population
+
+    print(state)
+    print(death_ratio)
+    print(test_ratio)
+
