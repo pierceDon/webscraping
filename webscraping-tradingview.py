@@ -16,7 +16,10 @@ url = 'https://www.tradingview.com/markets/stocks-usa/market-movers-gainers/'
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
 
 		
-
+counter = 1
+for x in range(5):
+    name = stock_data[counter].text
+    change = stock_data[counter+2].text
 
 
 
