@@ -42,7 +42,7 @@ soup = BeautifulSoup(webpage, 'html.parser')
 #Limit = find with limit of 1
 #keyword: allText = Obj.find(id="title",class="text")
 
-#print(soup.title.text)
+print(soup.title.text)
 
 table_rows = soup.findAll("tr")
 

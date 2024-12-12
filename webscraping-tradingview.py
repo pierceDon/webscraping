@@ -12,19 +12,35 @@ from bs4 import BeautifulSoup
 ##  > sudo "./Install Certificates.command"
 
 
-url = 'https://www.webull.com/quotes/us/gainers'
+url = 'https://www.webull.com/quote/us/gainers'
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
-
 req = Request(url, headers=headers)
-
 webpage = urlopen(req).read()
 
 soup = BeautifulSoup(webpage, 'html.parser')
 
+print(soup.title.text)
+
+stock_data = soup.findAll("div", attrs={'class':'table-cell'})
+
+# print(stock_data[1].text)
+# print(stock_data[3].text)
+# print(stock_data[4].text)
+# print(stock_data[1+11].text)
+
 counter = 1
+
 for x in range(5):
-    name = stock_data[counter].text
-    change = stock_data[counter+2].text
+    name_group = stock_data[counter]
+    name = name_group.find('p', class_ = 'tit bold').text
+    change = float(stock_data[counter+2].text.strip('+').strip('%'))/100
+    lastprice = float(stock_data[counter+3].text)
+
+    prevprice = round(lastprice / (1 + change), 2)
+
+    print(f"Company Name: {name}\nChange: {change:.2%}\nPrice: {lastprice}\nPrevious Price: {prevprice}")
+
+    counter += 11
 
 
 
