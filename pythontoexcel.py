@@ -99,3 +99,4 @@ for cell in write_sheet["D:D"]:
     cell.number_format = u'"$ "#,##0.00'
 
 # save the workbook
+wb.save('PythonToExcel.xlsx')
